@@ -11,11 +11,13 @@ function Login({navigation} : any) {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [loginScreen, setLoginScreen] = useState(true);
+  const [logdedIn, setLogedIn] = useState(false)
 
   const login = async (email: string, password: string) => {
     const user = await auth().signInWithEmailAndPassword(email, password);
-    console.log(user)
+    console.log(user, logdedIn)
     navigation.navigate('Login');
+    setLogedIn(true)
   }
 
   const signUp = async (email: string, password: string) => {
