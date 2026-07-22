@@ -1,0 +1,805 @@
+  $ /usr/local/bin/node -p require.resolve(     "react-native/scripts/react_native_pods.rb",     {paths: [process.argv[1]]},   ) /Users/leon/WebstormProjects/SkillForge/ios
+  /Users/leon/WebstormProjects/SkillForge/node_modules/react-native/scripts/react_native_pods.rb
+Found 4 modules for target `SkillForge`
+link_native_modules! {ios_packages: [{configurations: [], name: "@react-native-firebase/app", root: "/Users/leon/WebstormProjects/SkillForge/node_modules/@react-native-firebase/app", path: "../node_modules/@react-native-firebase/app", podspec_path: "/Users/leon/WebstormProjects/SkillForge/node_modules/@react-native-firebase/app/RNFBApp.podspec", script_phases: [{"name" => "[RNFB] Core Configuration", "path" => "./ios_config.sh", "execution_position" => "after_compile", "input_files" => ["$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)"]}]}, {configurations: [], name: "@react-native-firebase/auth", root: "/Users/leon/WebstormProjects/SkillForge/node_modules/@react-native-firebase/auth", path: "../node_modules/@react-native-firebase/auth", podspec_path: "/Users/leon/WebstormProjects/SkillForge/node_modules/@react-native-firebase/auth/RNFBAuth.podspec", script_phases: []}, {configurations: [], name: "react-native-safe-area-context", root: "/Users/leon/WebstormProjects/SkillForge/node_modules/react-native-safe-area-context", path: "../node_modules/react-native-safe-area-context", podspec_path: "/Users/leon/WebstormProjects/SkillForge/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec", script_phases: []}, {configurations: [], name: "react-native-screens", root: "/Users/leon/WebstormProjects/SkillForge/node_modules/react-native-screens", path: "../node_modules/react-native-screens", podspec_path: "/Users/leon/WebstormProjects/SkillForge/node_modules/react-native-screens/RNScreens.podspec", script_phases: []}], ios_project_root_path: "/Users/leon/WebstormProjects/SkillForge/ios", react_native_path: "../node_modules/react-native"}
+Adding a custom script phase for Pod RNFBApp: [RNFB] Core Configuration
+Auto-linking React Native modules for target `SkillForge`: RNFBApp, RNFBAuth, RNScreens, and react-native-safe-area-context
+Framework build type is static framework
+[ReactNativeDependencies] Setting up ReactNativeDependencies...
+[ReactNativeDependencies] Building from source: false
+[ReactNativeDependencies] Using tarball from URL: https://repo1.maven.org/maven2/com/facebook/react/react-native-artifacts/0.86.0/react-native-artifacts-0.86.0-reactnative-dependencies-debug.tar.gz
+[ReactNativeDependencies] Tarball reactnative-dependencies-0.86.0-debug.tar.gz already exists in Pods. Skipping download.
+[ReactNativeDependencies] Tarball reactnative-dependencies-0.86.0-release.tar.gz already exists in Pods. Skipping download.
+[ReactNativeDependencies] Source: {http: "https://repo1.maven.org/maven2/com/facebook/react/react-native-artifacts/0.86.0/react-native-artifacts-0.86.0-reactnative-dependencies-debug.tar.gz"}
+[ReactNativeCore] Setting up ReactNativeCore...
+[ReactNativeCore] Building from source: false
+Configuring the target with the New Architecture
+[ReactNativeCore] Using React Native Core and React Native Dependencies prebuilt versions.
+  $ /usr/local/bin/node ./../node_modules/react-native/scripts/generate-codegen-artifacts.js -p /Users/leon/WebstormProjects/SkillForge/ios/.. -o /Users/leon/WebstormProjects/SkillForge/ios -t ios
+  [36m[1m[Codegen][0m Analyzing /Users/leon/WebstormProjects/SkillForge/package.json[0m
+  [36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the app.[0m
+  [36m[1m[Codegen][0m [33mThe "codegenConfig" field is not defined in package.json. Assuming there is nothing to generate at the app level.[0m
+  [36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in react-native.config.js[0m
+  [36m[1m[Codegen][0m Found react-native-safe-area-context[0m
+  [36m[1m[Codegen][0m Found react-native-screens[0m
+  [36m[1m[Codegen][0m Processing safeareacontext[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Supported Apple platforms: ios, macos, tvos, visionos for safeareacontext[0m
+  [36m[1m[Codegen][0m Processing rnscreens[0m
+  [36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+  [36m[1m[Codegen][0m Supported Apple platforms: ios, tvos, visionos for rnscreens[0m
+  [36m[1m[Codegen][0m Generating Native Code for safeareacontext - ios[0m
+  [36m[1m[Codegen][0m Generated artifacts: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen[0m
+  [36m[1m[Codegen][0m Generating Native Code for rnscreens - ios[0m
+  [36m[1m[Codegen][0m Generated artifacts: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen[0m
+  [36m[1m[Codegen][0m Generating RCTThirdPartyComponentsProvider.h[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.h[0m
+  [36m[1m[Codegen][0m Generating RCTThirdPartyComponentsProvider.mm[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.mm[0m
+  [36m[1m[Codegen][0m Generating RCTModulesProvider.h[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.h[0m
+  [36m[1m[Codegen][0m Generating RCTModuleProviders.mm[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.mm[0m
+  [36m[1m[Codegen][0m Generating RCTAppDependencyProvider[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.h[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.mm[0m
+  [36m[1m[Codegen][0m Generated podspec: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/ReactAppDependencyProvider.podspec[0m
+  [36m[1m[Codegen][0m Generated podspec: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/ReactCodegen.podspec[0m
+  [36m[1m[Codegen][0m Generating Package.swift[0m
+  [36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/Package.swift[0m
+  [36m[1m[Codegen][0m [33mDone.[0m
+[36m[1m[Codegen][0m Analyzing /Users/leon/WebstormProjects/SkillForge/package.json[0m
+[36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in the app.[0m
+[36m[1m[Codegen][0m [33mThe "codegenConfig" field is not defined in package.json. Assuming there is nothing to generate at the app level.[0m
+[36m[1m[Codegen][0m [33mSearching for codegen-enabled libraries in react-native.config.js[0m
+[36m[1m[Codegen][0m Found react-native-safe-area-context[0m
+[36m[1m[Codegen][0m Found react-native-screens[0m
+[36m[1m[Codegen][0m Processing safeareacontext[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Supported Apple platforms: ios, macos, tvos, visionos for safeareacontext[0m
+[36m[1m[Codegen][0m Processing rnscreens[0m
+[36m[1m[Codegen][0m [33mSearching for podspec in the project dependencies.[0m
+[36m[1m[Codegen][0m Supported Apple platforms: ios, tvos, visionos for rnscreens[0m
+[36m[1m[Codegen][0m Generating Native Code for safeareacontext - ios[0m
+[36m[1m[Codegen][0m Generated artifacts: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen[0m
+[36m[1m[Codegen][0m Generating Native Code for rnscreens - ios[0m
+[36m[1m[Codegen][0m Generated artifacts: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen[0m
+[36m[1m[Codegen][0m Generating RCTThirdPartyComponentsProvider.h[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.h[0m
+[36m[1m[Codegen][0m Generating RCTThirdPartyComponentsProvider.mm[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.mm[0m
+[36m[1m[Codegen][0m Generating RCTModulesProvider.h[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.h[0m
+[36m[1m[Codegen][0m Generating RCTModuleProviders.mm[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.mm[0m
+[36m[1m[Codegen][0m Generating RCTAppDependencyProvider[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.h[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.mm[0m
+[36m[1m[Codegen][0m Generated podspec: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactAppDependencyProvider/ReactAppDependencyProvider.podspec[0m
+[36m[1m[Codegen][0m Generated podspec: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/ReactCodegen/ReactCodegen.podspec[0m
+[36m[1m[Codegen][0m Generating Package.swift[0m
+[36m[1m[Codegen][0m Generated artifact: /Users/leon/WebstormProjects/SkillForge/ios/build/generated/ios/Package.swift[0m
+[36m[1m[Codegen][0m [33mDone.[0m
+  $ /usr/local/bin/node -p require.resolve(     "react-native",     {paths: [process.argv[1]]},     ) /Users/leon/WebstormProjects/SkillForge/node_modules/react-native/third-party-podspecs
+  /Users/leon/WebstormProjects/SkillForge/node_modules/react-native/index.js
+[ReactNativeDependencies] Using tarball from URL: https://repo1.maven.org/maven2/com/facebook/react/react-native-artifacts/0.86.0/react-native-artifacts-0.86.0-reactnative-dependencies-debug.tar.gz
+[ReactNativeDependencies] Tarball reactnative-dependencies-0.86.0-debug.tar.gz already exists in Pods. Skipping download.
+[ReactNativeDependencies] Tarball reactnative-dependencies-0.86.0-release.tar.gz already exists in Pods. Skipping download.
+  Preparing
+
+Analyzing dependencies
+
+Inspecting targets to integrate
+  Using `ARCHS` setting to build architectures of target `Pods-SkillForge`: (``)
+
+Finding Podfile changes
+  - FBLazyVector
+  - RCTDeprecation
+  - RCTRequired
+  - RCTSwiftUI
+  - RCTSwiftUIWrapper
+  - RCTTypeSafety
+  - RNFBApp
+  - RNFBAuth
+  - RNScreens
+  - React
+  - React-Core
+  - React-Core-prebuilt
+  - React-CoreModules
+  - React-Fabric
+  - React-FabricComponents
+  - React-FabricImage
+  - React-ImageManager
+  - React-Mapbuffer
+  - React-NativeModulesApple
+  - React-RCTActionSheet
+  - React-RCTAnimation
+  - React-RCTAppDelegate
+  - React-RCTBlob
+  - React-RCTFBReactNativeSpec
+  - React-RCTFabric
+  - React-RCTImage
+  - React-RCTLinking
+  - React-RCTNetwork
+  - React-RCTRuntime
+  - React-RCTSettings
+  - React-RCTText
+  - React-RCTVibration
+  - React-RuntimeApple
+  - React-RuntimeCore
+  - React-RuntimeHermes
+  - React-callinvoker
+  - React-cxxreact
+  - React-debug
+  - React-defaultsnativemodule
+  - React-domnativemodule
+  - React-featureflags
+  - React-featureflagsnativemodule
+  - React-graphics
+  - React-hermes
+  - React-idlecallbacksnativemodule
+  - React-intersectionobservernativemodule
+  - React-jserrorhandler
+  - React-jsi
+  - React-jsiexecutor
+  - React-jsinspector
+  - React-jsinspectorcdp
+  - React-jsinspectornetwork
+  - React-jsinspectortracing
+  - React-jsitooling
+  - React-jsitracing
+  - React-logger
+  - React-microtasksnativemodule
+  - React-mutationobservernativemodule
+  - React-networking
+  - React-oscompat
+  - React-perflogger
+  - React-performancecdpmetrics
+  - React-performancetimeline
+  - React-rendererconsistency
+  - React-renderercss
+  - React-rendererdebug
+  - React-runtimeexecutor
+  - React-runtimescheduler
+  - React-timing
+  - React-utils
+  - React-viewtransitionnativemodule
+  - React-webperformancenativemodule
+  - ReactAppDependencyProvider
+  - ReactCodegen
+  - ReactCommon
+  - ReactNativeDependencies
+  - Yoga
+  - hermes-engine
+  - react-native-safe-area-context
+
+Fetching external sources
+-> Fetching podspec for `FBLazyVector` from `../node_modules/react-native/Libraries/FBLazyVector`
+-> Fetching podspec for `RCTDeprecation` from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`
+-> Fetching podspec for `RCTRequired` from `../node_modules/react-native/Libraries/Required`
+-> Fetching podspec for `RCTSwiftUI` from `../node_modules/react-native/ReactApple/RCTSwiftUI`
+-> Fetching podspec for `RCTSwiftUIWrapper` from `../node_modules/react-native/ReactApple/RCTSwiftUIWrapper`
+-> Fetching podspec for `RCTTypeSafety` from `../node_modules/react-native/Libraries/TypeSafety`
+-> Fetching podspec for `RNFBApp` from `../node_modules/@react-native-firebase/app`
+-> Fetching podspec for `RNFBAuth` from `../node_modules/@react-native-firebase/auth`
+-> Fetching podspec for `RNScreens` from `../node_modules/react-native-screens`
+-> Fetching podspec for `React` from `../node_modules/react-native/`
+-> Fetching podspec for `React-Core` from `../node_modules/react-native/`
+-> Fetching podspec for `React-CoreModules` from `../node_modules/react-native/React/CoreModules`
+-> Fetching podspec for `React-Fabric` from `../node_modules/react-native/ReactCommon`
+-> Fetching podspec for `React-FabricComponents` from `../node_modules/react-native/ReactCommon`
+-> Fetching podspec for `React-FabricImage` from `../node_modules/react-native/ReactCommon`
+-> Fetching podspec for `React-ImageManager` from `../node_modules/react-native/ReactCommon/react/renderer/imagemanager/platform/ios`
+-> Fetching podspec for `React-Mapbuffer` from `../node_modules/react-native/ReactCommon`
+-> Fetching podspec for `React-NativeModulesApple` from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`
+-> Fetching podspec for `React-RCTActionSheet` from `../node_modules/react-native/Libraries/ActionSheetIOS`
+-> Fetching podspec for `React-RCTAnimation` from `../node_modules/react-native/Libraries/NativeAnimation`
+-> Fetching podspec for `React-RCTAppDelegate` from `../node_modules/react-native/Libraries/AppDelegate`
+-> Fetching podspec for `React-RCTBlob` from `../node_modules/react-native/Libraries/Blob`
+-> Fetching podspec for `React-RCTFBReactNativeSpec` from `../node_modules/react-native/React`
+-> Fetching podspec for `React-RCTFabric` from `../node_modules/react-native/React`
+-> Fetching podspec for `React-RCTImage` from `../node_modules/react-native/Libraries/Image`
+-> Fetching podspec for `React-RCTLinking` from `../node_modules/react-native/Libraries/LinkingIOS`
+-> Fetching podspec for `React-RCTNetwork` from `../node_modules/react-native/Libraries/Network`
+-> Fetching podspec for `React-RCTRuntime` from `../node_modules/react-native/React/Runtime`
+-> Fetching podspec for `React-RCTSettings` from `../node_modules/react-native/Libraries/Settings`
+-> Fetching podspec for `React-RCTText` from `../node_modules/react-native/Libraries/Text`
+-> Fetching podspec for `React-RCTVibration` from `../node_modules/react-native/Libraries/Vibration`
+-> Fetching podspec for `React-RuntimeApple` from `../node_modules/react-native/ReactCommon/react/runtime/platform/ios`
+-> Fetching podspec for `React-RuntimeCore` from `../node_modules/react-native/ReactCommon/react/runtime`
+-> Fetching podspec for `React-RuntimeHermes` from `../node_modules/react-native/ReactCommon/react/runtime`
+-> Fetching podspec for `React-callinvoker` from `../node_modules/react-native/ReactCommon/callinvoker`
+-> Fetching podspec for `React-cxxreact` from `../node_modules/react-native/ReactCommon/cxxreact`
+-> Fetching podspec for `React-debug` from `../node_modules/react-native/ReactCommon/react/debug`
+-> Fetching podspec for `React-defaultsnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/defaults`
+-> Fetching podspec for `React-domnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/dom`
+-> Fetching podspec for `React-featureflags` from `../node_modules/react-native/ReactCommon/react/featureflags`
+-> Fetching podspec for `React-featureflagsnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/featureflags`
+-> Fetching podspec for `React-graphics` from `../node_modules/react-native/ReactCommon/react/renderer/graphics`
+-> Fetching podspec for `React-hermes` from `../node_modules/react-native/ReactCommon/hermes`
+-> Fetching podspec for `React-idlecallbacksnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/idlecallbacks`
+-> Fetching podspec for `React-intersectionobservernativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/intersectionobserver`
+-> Fetching podspec for `React-jserrorhandler` from `../node_modules/react-native/ReactCommon/jserrorhandler`
+-> Fetching podspec for `React-jsi` from `../node_modules/react-native/ReactCommon/jsi`
+-> Fetching podspec for `React-jsiexecutor` from `../node_modules/react-native/ReactCommon/jsiexecutor`
+-> Fetching podspec for `React-jsinspector` from `../node_modules/react-native/ReactCommon/jsinspector-modern`
+-> Fetching podspec for `React-jsinspectorcdp` from `../node_modules/react-native/ReactCommon/jsinspector-modern/cdp`
+-> Fetching podspec for `React-jsinspectornetwork` from `../node_modules/react-native/ReactCommon/jsinspector-modern/network`
+-> Fetching podspec for `React-jsinspectortracing` from `../node_modules/react-native/ReactCommon/jsinspector-modern/tracing`
+-> Fetching podspec for `React-jsitooling` from `../node_modules/react-native/ReactCommon/jsitooling`
+-> Fetching podspec for `React-jsitracing` from `../node_modules/react-native/ReactCommon/hermes/executor/`
+-> Fetching podspec for `React-logger` from `../node_modules/react-native/ReactCommon/logger`
+-> Fetching podspec for `React-microtasksnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`
+-> Fetching podspec for `React-mutationobservernativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/mutationobserver`
+-> Fetching podspec for `React-networking` from `../node_modules/react-native/ReactCommon/react/networking`
+-> Fetching podspec for `React-oscompat` from `../node_modules/react-native/ReactCommon/oscompat`
+-> Fetching podspec for `React-perflogger` from `../node_modules/react-native/ReactCommon/reactperflogger`
+-> Fetching podspec for `React-performancecdpmetrics` from `../node_modules/react-native/ReactCommon/react/performance/cdpmetrics`
+-> Fetching podspec for `React-performancetimeline` from `../node_modules/react-native/ReactCommon/react/performance/timeline`
+-> Fetching podspec for `React-rendererconsistency` from `../node_modules/react-native/ReactCommon/react/renderer/consistency`
+-> Fetching podspec for `React-renderercss` from `../node_modules/react-native/ReactCommon/react/renderer/css`
+-> Fetching podspec for `React-rendererdebug` from `../node_modules/react-native/ReactCommon/react/renderer/debug`
+-> Fetching podspec for `React-runtimeexecutor` from `../node_modules/react-native/ReactCommon/runtimeexecutor`
+-> Fetching podspec for `React-runtimescheduler` from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`
+-> Fetching podspec for `React-timing` from `../node_modules/react-native/ReactCommon/react/timing`
+-> Fetching podspec for `React-utils` from `../node_modules/react-native/ReactCommon/react/utils`
+-> Fetching podspec for `React-viewtransitionnativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/viewtransition`
+-> Fetching podspec for `React-webperformancenativemodule` from `../node_modules/react-native/ReactCommon/react/nativemodule/webperformance`
+-> Fetching podspec for `ReactAppDependencyProvider` from `build/generated/ios/ReactAppDependencyProvider`
+-> Fetching podspec for `ReactCodegen` from `build/generated/ios/ReactCodegen`
+-> Fetching podspec for `ReactCommon` from `../node_modules/react-native/ReactCommon`
+-> Fetching podspec for `Yoga` from `../node_modules/react-native/ReactCommon/yoga`
+-> Fetching podspec for `react-native-safe-area-context` from `../node_modules/react-native-safe-area-context`
+
+Resolving dependencies of `Podfile`
+  CDN: trunk Relative path: CocoaPods-version.yml exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_0_3_5.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/3/5/Firebase/12.16.0/Firebase.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/3/5/Firebase/12.15.0/Firebase.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/3/5/Firebase/12.15.0/Firebase.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_6_3_6.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/6/3/6/FirebaseAuth/12.16.0/FirebaseAuth.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/6/3/6/FirebaseAuth/12.15.0/FirebaseAuth.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_4_2_7.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/4/2/7/FirebaseAuthInterop/12.16.0/FirebaseAuthInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_e_9_8.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/e/9/8/FirebaseAppCheckInterop/12.16.0/FirebaseAppCheckInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_8_b_d.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/8/b/d/FirebaseCore/12.16.0/FirebaseCore.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_4_7_f.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/4/7/f/FirebaseCoreExtension/12.16.0/FirebaseCoreExtension.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_0_8_4.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_c_e_3.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/c/e/3/GTMSessionFetcher/5.3.0/GTMSessionFetcher.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/c/e/3/GTMSessionFetcher/5.3.0/GTMSessionFetcher.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_c_1_1.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/c/1/1/RecaptchaInterop/101.0.0/RecaptchaInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/c/1/1/RecaptchaInterop/101.0.0/RecaptchaInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/e/9/8/FirebaseAppCheckInterop/12.15.0/FirebaseAppCheckInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/8/b/d/FirebaseCore/12.15.0/FirebaseCore.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: all_pods_versions_7_9_1.txt exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/7/9/1/FirebaseCoreInternal/12.16.0/FirebaseCoreInternal.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/7/9/1/FirebaseCoreInternal/12.15.0/FirebaseCoreInternal.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/4/7/f/FirebaseCoreExtension/12.15.0/FirebaseCoreExtension.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/4/2/7/FirebaseAuthInterop/12.15.0/FirebaseAuthInterop.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+  CDN: trunk Relative path: Specs/0/8/4/GoogleUtilities/8.1.2/GoogleUtilities.podspec.json exists! Returning local because checking is only performed in repo update
+
+Comparing resolved specification to the sandbox manifest
+  - FBLazyVector
+  - Firebase
+  - FirebaseAppCheckInterop
+  - FirebaseAuth
+  - FirebaseAuthInterop
+  - FirebaseCore
+  - FirebaseCoreExtension
+  - FirebaseCoreInternal
+  - GTMSessionFetcher
+  - GoogleUtilities
+  - RCTDeprecation
+  - RCTRequired
+  - RCTSwiftUI
+  - RCTSwiftUIWrapper
+  - RCTTypeSafety
+  - RNFBApp
+  - RNFBAuth
+  - RNScreens
+  - React
+  - React-Core
+  - React-Core-prebuilt
+  - React-CoreModules
+  - React-Fabric
+  - React-FabricComponents
+  - React-FabricImage
+  - React-ImageManager
+  - React-Mapbuffer
+  - React-NativeModulesApple
+  - React-RCTActionSheet
+  - React-RCTAnimation
+  - React-RCTAppDelegate
+  - React-RCTBlob
+  - React-RCTFBReactNativeSpec
+  - React-RCTFabric
+  - React-RCTImage
+  - React-RCTLinking
+  - React-RCTNetwork
+  - React-RCTRuntime
+  - React-RCTSettings
+  - React-RCTText
+  - React-RCTVibration
+  - React-RuntimeApple
+  - React-RuntimeCore
+  - React-RuntimeHermes
+  - React-callinvoker
+  - React-cxxreact
+  - React-debug
+  - React-defaultsnativemodule
+  - React-domnativemodule
+  - React-featureflags
+  - React-featureflagsnativemodule
+  - React-graphics
+  - React-hermes
+  - React-idlecallbacksnativemodule
+  - React-intersectionobservernativemodule
+  - React-jserrorhandler
+  - React-jsi
+  - React-jsiexecutor
+  - React-jsinspector
+  - React-jsinspectorcdp
+  - React-jsinspectornetwork
+  - React-jsinspectortracing
+  - React-jsitooling
+  - React-jsitracing
+  - React-logger
+  - React-microtasksnativemodule
+  - React-mutationobservernativemodule
+  - React-networking
+  - React-oscompat
+  - React-perflogger
+  - React-performancecdpmetrics
+  - React-performancetimeline
+  - React-rendererconsistency
+  - React-renderercss
+  - React-rendererdebug
+  - React-runtimeexecutor
+  - React-runtimescheduler
+  - React-timing
+  - React-utils
+  - React-viewtransitionnativemodule
+  - React-webperformancenativemodule
+  - ReactAppDependencyProvider
+  - ReactCodegen
+  - ReactCommon
+  - ReactNativeDependencies
+  - RecaptchaInterop
+  - Yoga
+  - hermes-engine
+  - react-native-safe-area-context
+
+Downloading dependencies
+
+-> Using FBLazyVector (0.86.0)
+
+-> Using Firebase (12.15.0)
+
+-> Using FirebaseAppCheckInterop (12.15.0)
+
+-> Using FirebaseAuth (12.15.0)
+
+-> Using FirebaseAuthInterop (12.15.0)
+
+-> Using FirebaseCore (12.15.0)
+
+-> Using FirebaseCoreExtension (12.15.0)
+
+-> Using FirebaseCoreInternal (12.15.0)
+
+-> Using GTMSessionFetcher (5.3.0)
+
+-> Using GoogleUtilities (8.1.2)
+
+-> Using RCTDeprecation (0.86.0)
+
+-> Using RCTRequired (0.86.0)
+
+-> Using RCTSwiftUI (0.86.0)
+
+-> Using RCTSwiftUIWrapper (0.86.0)
+
+-> Using RCTTypeSafety (0.86.0)
+
+-> Using RNFBApp (25.1.0)
+
+-> Using RNFBAuth (25.1.0)
+
+-> Using RNScreens (4.26.2)
+
+-> Using React (0.86.0)
+
+-> Using React-Core (0.86.0)
+
+-> Using React-Core-prebuilt (0.86.0)
+
+-> Using React-CoreModules (0.86.0)
+
+-> Using React-Fabric (0.86.0)
+
+-> Using React-FabricComponents (0.86.0)
+
+-> Using React-FabricImage (0.86.0)
+
+-> Using React-ImageManager (0.86.0)
+
+-> Using React-Mapbuffer (0.86.0)
+
+-> Using React-NativeModulesApple (0.86.0)
+
+-> Using React-RCTActionSheet (0.86.0)
+
+-> Using React-RCTAnimation (0.86.0)
+
+-> Using React-RCTAppDelegate (0.86.0)
+
+-> Using React-RCTBlob (0.86.0)
+
+-> Using React-RCTFBReactNativeSpec (0.86.0)
+
+-> Using React-RCTFabric (0.86.0)
+
+-> Using React-RCTImage (0.86.0)
+
+-> Using React-RCTLinking (0.86.0)
+
+-> Using React-RCTNetwork (0.86.0)
+
+-> Using React-RCTRuntime (0.86.0)
+
+-> Using React-RCTSettings (0.86.0)
+
+-> Using React-RCTText (0.86.0)
+
+-> Using React-RCTVibration (0.86.0)
+
+-> Using React-RuntimeApple (0.86.0)
+
+-> Using React-RuntimeCore (0.86.0)
+
+-> Using React-RuntimeHermes (0.86.0)
+
+-> Using React-callinvoker (0.86.0)
+
+-> Using React-cxxreact (0.86.0)
+
+-> Using React-debug (0.86.0)
+
+-> Using React-defaultsnativemodule (0.86.0)
+
+-> Using React-domnativemodule (0.86.0)
+
+-> Using React-featureflags (0.86.0)
+
+-> Using React-featureflagsnativemodule (0.86.0)
+
+-> Using React-graphics (0.86.0)
+
+-> Using React-hermes (0.86.0)
+
+-> Using React-idlecallbacksnativemodule (0.86.0)
+
+-> Using React-intersectionobservernativemodule (0.86.0)
+
+-> Using React-jserrorhandler (0.86.0)
+
+-> Using React-jsi (0.86.0)
+
+-> Using React-jsiexecutor (0.86.0)
+
+-> Using React-jsinspector (0.86.0)
+
+-> Using React-jsinspectorcdp (0.86.0)
+
+-> Using React-jsinspectornetwork (0.86.0)
+
+-> Using React-jsinspectortracing (0.86.0)
+
+-> Using React-jsitooling (0.86.0)
+
+-> Using React-jsitracing (0.86.0)
+
+-> Using React-logger (0.86.0)
+
+-> Using React-microtasksnativemodule (0.86.0)
+
+-> Using React-mutationobservernativemodule (0.86.0)
+
+-> Using React-networking (0.86.0)
+
+-> Using React-oscompat (0.86.0)
+
+-> Using React-perflogger (0.86.0)
+
+-> Using React-performancecdpmetrics (0.86.0)
+
+-> Using React-performancetimeline (0.86.0)
+
+-> Using React-rendererconsistency (0.86.0)
+
+-> Using React-renderercss (0.86.0)
+
+-> Using React-rendererdebug (0.86.0)
+
+-> Using React-runtimeexecutor (0.86.0)
+
+-> Using React-runtimescheduler (0.86.0)
+
+-> Using React-timing (0.86.0)
+
+-> Using React-utils (0.86.0)
+
+-> Using React-viewtransitionnativemodule (0.86.0)
+
+-> Using React-webperformancenativemodule (0.86.0)
+
+-> Using ReactAppDependencyProvider (0.86.0)
+
+-> Using ReactCodegen (0.86.0)
+
+-> Using ReactCommon (0.86.0)
+
+-> Using ReactNativeDependencies (0.86.0)
+
+-> Using RecaptchaInterop (101.0.0)
+
+-> Using Yoga (0.0.0)
+
+-> Using hermes-engine (250829098.0.14)
+
+-> Using react-native-safe-area-context (5.8.0)
+  - Running pre install hooks
+  - Running pre integrate hooks
+
+Generating Pods project
+  - Creating Pods project
+  - Installing files into Pods project
+    - Adding source files
+    - Adding frameworks
+    - Adding libraries
+    - Adding resources
+    - Adding development pod helper files
+    - Linking headers
+  - Installing Pod Targets
+    - Installing target `FBLazyVector` iOS 15.1
+    - Installing target `Firebase` iOS 15.0
+    - Installing target `FirebaseAppCheckInterop` iOS 15.0
+      - Generating module map file at `Pods/Target Support Files/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseAppCheckInterop/FirebaseAppCheckInterop-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseAppCheckInterop/FirebaseAppCheckInterop-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseAppCheckInterop/FirebaseAppCheckInterop-dummy.m`
+    - Installing target `FirebaseAuth` iOS 15.0
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseAuth/ResourceBundle-FirebaseAuth_Privacy-FirebaseAuth-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/FirebaseAuth/FirebaseAuth.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseAuth/FirebaseAuth-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseAuth/FirebaseAuth-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseAuth/FirebaseAuth-dummy.m`
+    - Installing target `FirebaseAuthInterop` iOS 15.0
+      - Generating module map file at `Pods/Target Support Files/FirebaseAuthInterop/FirebaseAuthInterop.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseAuthInterop/FirebaseAuthInterop-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseAuthInterop/FirebaseAuthInterop-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseAuthInterop/FirebaseAuthInterop-dummy.m`
+    - Installing target `FirebaseCore` iOS 15.0
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCore/ResourceBundle-FirebaseCore_Privacy-FirebaseCore-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/FirebaseCore/FirebaseCore.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseCore/FirebaseCore-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCore/FirebaseCore-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseCore/FirebaseCore-dummy.m`
+    - Installing target `FirebaseCoreExtension` iOS 15.0
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCoreExtension/ResourceBundle-FirebaseCoreExtension_Privacy-FirebaseCoreExtension-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/FirebaseCoreExtension/FirebaseCoreExtension.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseCoreExtension/FirebaseCoreExtension-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCoreExtension/FirebaseCoreExtension-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseCoreExtension/FirebaseCoreExtension-dummy.m`
+    - Installing target `FirebaseCoreInternal` iOS 15.0
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCoreInternal/ResourceBundle-FirebaseCoreInternal_Privacy-FirebaseCoreInternal-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/FirebaseCoreInternal/FirebaseCoreInternal.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/FirebaseCoreInternal/FirebaseCoreInternal-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/FirebaseCoreInternal/FirebaseCoreInternal-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/FirebaseCoreInternal/FirebaseCoreInternal-dummy.m`
+    - Installing target `GTMSessionFetcher` iOS 15.0
+      - Generating Info.plist file at `Pods/Target Support Files/GTMSessionFetcher/ResourceBundle-GTMSessionFetcher_Core_Privacy-GTMSessionFetcher-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/GTMSessionFetcher/GTMSessionFetcher.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/GTMSessionFetcher/GTMSessionFetcher-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/GTMSessionFetcher/GTMSessionFetcher-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/GTMSessionFetcher/GTMSessionFetcher-dummy.m`
+    - Installing target `GoogleUtilities` iOS 12.0
+      - Generating Info.plist file at `Pods/Target Support Files/GoogleUtilities/ResourceBundle-GoogleUtilities_Privacy-GoogleUtilities-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/GoogleUtilities/GoogleUtilities.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/GoogleUtilities/GoogleUtilities-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/GoogleUtilities/GoogleUtilities-dummy.m`
+    - Installing target `RCTDeprecation` iOS 8.0
+    - Installing target `RCTRequired` iOS 15.1
+    - Installing target `RCTSwiftUI` iOS 15.1
+    - Installing target `RCTSwiftUIWrapper` iOS 15.1
+    - Installing target `RCTTypeSafety` iOS 15.1
+    - Installing target `RNFBApp` iOS 15.0
+      - Generating module map file at `Pods/Target Support Files/RNFBApp/RNFBApp.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/RNFBApp/RNFBApp-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/RNFBApp/RNFBApp-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/RNFBApp/RNFBApp-dummy.m`
+    - Installing target `RNFBAuth` iOS 15.0
+      - Generating module map file at `Pods/Target Support Files/RNFBAuth/RNFBAuth.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/RNFBAuth/RNFBAuth-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/RNFBAuth/RNFBAuth-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/RNFBAuth/RNFBAuth-dummy.m`
+    - Installing target `RNScreens` iOS 15.1
+      - Generating module map file at `Pods/Target Support Files/RNScreens/RNScreens.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/RNScreens/RNScreens-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/RNScreens/RNScreens-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/RNScreens/RNScreens-dummy.m`
+    - Installing target `React` iOS 15.1
+    - Installing target `React-Core` iOS 15.1
+      - Generating Info.plist file at `Pods/Target Support Files/React-Core/ResourceBundle-React-Core_privacy-React-Core-Info.plist`
+    - Installing target `React-Core-prebuilt` iOS 15.1
+    - Installing target `React-CoreModules` iOS 15.1
+    - Installing target `React-Fabric` iOS 15.1
+    - Installing target `React-FabricComponents` iOS 15.1
+    - Installing target `React-FabricImage` iOS 15.1
+    - Installing target `React-ImageManager` iOS 15.1
+    - Installing target `React-Mapbuffer` iOS 15.1
+    - Installing target `React-NativeModulesApple` iOS 15.1
+    - Installing target `React-RCTActionSheet` iOS 15.1
+    - Installing target `React-RCTAnimation` iOS 15.1
+    - Installing target `React-RCTAppDelegate` iOS 15.1
+    - Installing target `React-RCTBlob` iOS 15.1
+    - Installing target `React-RCTFBReactNativeSpec` iOS 15.1
+    - Installing target `React-RCTFabric` iOS 15.1
+    - Installing target `React-RCTImage` iOS 15.1
+    - Installing target `React-RCTLinking` iOS 15.1
+    - Installing target `React-RCTNetwork` iOS 15.1
+    - Installing target `React-RCTRuntime` iOS 15.1
+    - Installing target `React-RCTSettings` iOS 15.1
+    - Installing target `React-RCTText` iOS 15.1
+    - Installing target `React-RCTVibration` iOS 15.1
+    - Installing target `React-RuntimeApple` iOS 15.1
+    - Installing target `React-RuntimeCore` iOS 15.1
+    - Installing target `React-RuntimeHermes` iOS 15.1
+    - Installing target `React-callinvoker` iOS 15.1
+    - Installing target `React-cxxreact` iOS 15.1
+      - Generating Info.plist file at `Pods/Target Support Files/React-cxxreact/ResourceBundle-React-cxxreact_privacy-React-cxxreact-Info.plist`
+    - Installing target `React-debug` iOS 15.1
+    - Installing target `React-defaultsnativemodule` iOS 15.1
+    - Installing target `React-domnativemodule` iOS 15.1
+    - Installing target `React-featureflags` iOS 15.1
+    - Installing target `React-featureflagsnativemodule` iOS 15.1
+    - Installing target `React-graphics` iOS 15.1
+    - Installing target `React-hermes` iOS 15.1
+    - Installing target `React-idlecallbacksnativemodule` iOS 15.1
+    - Installing target `React-intersectionobservernativemodule` iOS 15.1
+    - Installing target `React-jserrorhandler` iOS 15.1
+    - Installing target `React-jsi` iOS 15.1
+    - Installing target `React-jsiexecutor` iOS 15.1
+    - Installing target `React-jsinspector` iOS 15.1
+    - Installing target `React-jsinspectorcdp` iOS 15.1
+    - Installing target `React-jsinspectornetwork` iOS 15.1
+    - Installing target `React-jsinspectortracing` iOS 15.1
+    - Installing target `React-jsitooling` iOS 15.1
+    - Installing target `React-jsitracing` iOS 15.1
+    - Installing target `React-logger` iOS 15.1
+    - Installing target `React-microtasksnativemodule` iOS 15.1
+    - Installing target `React-mutationobservernativemodule` iOS 15.1
+    - Installing target `React-networking` iOS 15.1
+    - Installing target `React-oscompat` iOS 15.1
+    - Installing target `React-perflogger` iOS 15.1
+    - Installing target `React-performancecdpmetrics` iOS 15.1
+    - Installing target `React-performancetimeline` iOS 15.1
+    - Installing target `React-rendererconsistency` iOS 15.1
+    - Installing target `React-renderercss` iOS 15.1
+    - Installing target `React-rendererdebug` iOS 15.1
+    - Installing target `React-runtimeexecutor` iOS 15.1
+    - Installing target `React-runtimescheduler` iOS 15.1
+    - Installing target `React-timing` iOS 15.1
+      - Generating Info.plist file at `Pods/Target Support Files/React-timing/ResourceBundle-React-timing_privacy-React-timing-Info.plist`
+    - Installing target `React-utils` iOS 15.1
+    - Installing target `React-viewtransitionnativemodule` iOS 15.1
+    - Installing target `React-webperformancenativemodule` iOS 15.1
+    - Installing target `ReactAppDependencyProvider` iOS 15.1
+      - Generating module map file at `Pods/Target Support Files/ReactAppDependencyProvider/ReactAppDependencyProvider.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/ReactAppDependencyProvider/ReactAppDependencyProvider-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/ReactAppDependencyProvider/ReactAppDependencyProvider-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/ReactAppDependencyProvider/ReactAppDependencyProvider-dummy.m`
+    - Installing target `ReactCodegen` iOS 15.1
+      - Generating module map file at `Pods/Target Support Files/ReactCodegen/ReactCodegen.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/ReactCodegen/ReactCodegen-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/ReactCodegen/ReactCodegen-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/ReactCodegen/ReactCodegen-dummy.m`
+    - Installing target `ReactCommon` iOS 15.1
+    - Installing target `ReactNativeDependencies` iOS 15.1
+    - Installing target `RecaptchaInterop` iOS 11.0
+      - Generating module map file at `Pods/Target Support Files/RecaptchaInterop/RecaptchaInterop.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/RecaptchaInterop/RecaptchaInterop-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/RecaptchaInterop/RecaptchaInterop-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/RecaptchaInterop/RecaptchaInterop-dummy.m`
+    - Installing target `Yoga` iOS 15.1
+    - Installing target `hermes-engine` iOS 15.1
+    - Installing target `react-native-safe-area-context` iOS 12.4
+      - Generating module map file at `Pods/Target Support Files/react-native-safe-area-context/react-native-safe-area-context.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/react-native-safe-area-context/react-native-safe-area-context-umbrella.h`
+      - Generating Info.plist file at `Pods/Target Support Files/react-native-safe-area-context/react-native-safe-area-context-Info.plist`
+      - Generating dummy source at `Pods/Target Support Files/react-native-safe-area-context/react-native-safe-area-context-dummy.m`
+  - Installing Aggregate Targets
+    - Installing target `Pods-SkillForge` iOS 15.1
+      - Generating Info.plist file at `Pods/Target Support Files/Pods-SkillForge/Pods-SkillForge-Info.plist`
+      - Generating module map file at `Pods/Target Support Files/Pods-SkillForge/Pods-SkillForge.modulemap`
+      - Generating umbrella header at `Pods/Target Support Files/Pods-SkillForge/Pods-SkillForge-umbrella.h`
+      - Generating dummy source at `Pods/Target Support Files/Pods-SkillForge/Pods-SkillForge-dummy.m`
+  - Integrating targets
+
+Integrating target `React-Core-prebuilt`
+    Adding Build Phase '[CP] Copy XCFrameworks' to project.
+    Adding Build Phase '[CP-User] [RNCore] Replace React Native Core for the right configuration, if needed' to project.
+
+Integrating target `React-RCTFBReactNativeSpec`
+    Adding Build Phase '[CP-User] [RN]Check FBReactNativeSpec' to project.
+
+Integrating target `ReactCodegen`
+    Adding Build Phase '[CP-User] Generate Specs' to project.
+
+Integrating target `ReactNativeDependencies`
+    Adding Build Phase '[CP] Copy XCFrameworks' to project.
+    Adding Build Phase '[CP-User] [RNDeps] Replace React Native Dependencies for the right configuration, if needed' to project.
+
+Integrating target `hermes-engine`
+    Adding Build Phase '[CP] Copy XCFrameworks' to project.
+    Adding Build Phase '[CP-User] [Hermes] Replace Hermes for the right configuration, if needed' to project.
+  - Stabilizing target UUIDs
+  - Running post install hooks
+Setting USE_HERMES build settings
+Setting REACT_NATIVE_PATH build settings
+Setting SWIFT_ACTIVE_COMPILATION_CONDITIONS build settings
+[Ccache]: Removing Ccache from CC, LD, CXX & LDPLUSPLUS build settings
+Setting SWIFT_ENABLE_EXPLICIT_MODULES build settings
+[ReactNativeCore] Processing VFS overlay file...
+[ReactNativeCore]   Created VFS overlay at /Users/leon/WebstormProjects/SkillForge/ios/Pods/React-Core-prebuilt/React-VFS.yaml
+[ReactNativeCore] VFS overlay setup complete
+[ReactNativeCore] Configuring xcconfig for prebuilt React Native Core...
+[ReactNativeCore] Prebuilt xcconfig configuration complete
+[SPM] Cleaning old SPM dependencies from Pods project
+[SPM] Adding SPM dependencies to Pods project
+[Privacy Manifest Aggregation] Appending aggregated reasons to existing PrivacyInfo.xcprivacy file.
+[Privacy Manifest Aggregation] Reading .xcprivacy files to aggregate all used Required Reason APIs.
+Setting CLANG_CXX_LANGUAGE_STANDARD to c++20 on /Users/leon/WebstormProjects/SkillForge/ios/SkillForge.xcodeproj
+
+==================== DEPRECATION NOTICE =====================
+Calling `pod install` directly is deprecated in React Native
+because we are moving away from Cocoapods toward alternative
+solutions to build the project.
+* If you are using Expo, please run:
+`npx expo run:ios`
+* If you are using the Community CLI, please run:
+`yarn ios`
+=============================================================
+
+Pod install took 9 [s] to run
+    - Podfile
+  - Writing Xcode project file to `Pods/Pods.xcodeproj`
+  Cleaning up sandbox directory
+
+Integrating client project
+
+Integrating target `Pods-SkillForge` (`SkillForge.xcodeproj` project)
+  - Running post integrate hooks
+  - Writing Lockfile in `Podfile.lock`
+  - Writing Manifest in `Pods/Manifest.lock`
+
+-> Pod installation complete! There are 80 dependencies from the Podfile and 89 total pods installed.
+
+[!] FirebaseCore has been deprecated in favor of the Firebase Apple SDK via Swift Package Manager. Existing CocoaPods versions will remain available and installations will remain functional, but new versions will no longer be published to CocoaPods after October 2026. See: https://firebase.google.com/docs/ios/cocoapods-deprecation
