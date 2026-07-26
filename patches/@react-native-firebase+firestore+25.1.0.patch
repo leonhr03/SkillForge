@@ -1,0 +1,13 @@
+diff --git a/node_modules/@react-native-firebase/firestore/ios/RNFBFirestore/RNFBFirestoreModule.h b/node_modules/@react-native-firebase/firestore/ios/RNFBFirestore/RNFBFirestoreModule.h
+index a989534..6945f4d 100644
+--- a/node_modules/@react-native-firebase/firestore/ios/RNFBFirestore/RNFBFirestoreModule.h
++++ b/node_modules/@react-native-firebase/firestore/ios/RNFBFirestore/RNFBFirestoreModule.h
+@@ -14,7 +14,7 @@
+  * limitations under the License.
+  *
+  */
+-
++#import <React/RCTBridgeModule.h>
+ #import <Firebase/Firebase.h>
+ #import <Foundation/Foundation.h>
+ #import <RNFBApp/RNFBSharedUtils.h>
