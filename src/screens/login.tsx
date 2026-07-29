@@ -2,8 +2,6 @@ import "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 
 
@@ -15,27 +13,34 @@ function Login({navigation} : any) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const checkLogin = async () => {
-      const stored = await AsyncStorage.getItem("isLogdedIn");
-      const isLogdedIn = stored ? JSON.parse(stored) : "";
+    const unsubscribe = auth().onAuthStateChanged((user) => {
 
-      if(isLogdedIn === "true") {
-        navigation.navigate("Tabs")
+      if (user) {
+        console.log("Firebase user:", user.uid);
+        navigation.replace("Tabs");
       } else {
-        setLoading(true)
+        setLoading(true);
       }
-    }
 
-    checkLogin()
+    });
+
+    return unsubscribe;
   }, [navigation]);
 
 
   const login = async (email: string, password: string) => {
-    const user = await auth().signInWithEmailAndPassword(email, password);
-    await AsyncStorage.setItem("isLogdedIn", JSON.stringify("true"))
-    navigation.navigate('Tabs');
-    console.log(user)
-  }
+    try {
+      const user = await auth()
+        .signInWithEmailAndPassword(email, password);
+
+      console.log("LOGIN SUCCESS:", user.user.uid);
+
+      navigation.replace("Tabs");
+
+    } catch(error:any) {
+      console.log("LOGIN ERROR:", error.message);
+    }
+  };
 
   const signUp = async (email: string, password: string) => {
     if (password === repeatPassword) {
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 15,
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 10,
     boxShadow: '0px 4px 10px rgba(0,0,0,0.25)',
     gap: 10,
     alignItems: 'center',
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#000',
-    borderRadius: 15,
+    borderRadius: 10,
     padding: 10,
     width: '90%',
   },
@@ -130,7 +135,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#3B82F6',
     padding: 10,
-    borderRadius: 15,
+    borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
     width: "80%"

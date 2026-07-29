@@ -8,10 +8,11 @@ import {
   Pressable,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import database from '@react-native-firebase/database';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/core';
 
 interface Habit {
   id: string;
@@ -49,23 +50,27 @@ export default function Explore() {
     { label: 'Time Management', value: 'time_management' },
   ]);
 
-  useEffect(() => {
-    const loadHabits = async () => {
-      const snapshot = await database().ref('/socialHabits').once('value');
+  useFocusEffect(
+    React.useCallback(() => {
+      const loadHabits = async () => {
+        const snapshot = await database().ref('/socialHabits').once('value');
 
-      const data = snapshot.val();
+        const data = snapshot.val();
 
-      const habitsArray = Object.keys(data)
-        .filter(key => data[key].title)
-        .map(key => ({
-          id: key,
-          ...data[key],
-        }));
-      setSocialHabits(habitsArray);
-    };
+        console.log(data)
 
-    loadHabits();
-  }, []);
+        const habitsArray = Object.keys(data)
+          .filter(key => data[key].title)
+          .map(key => ({
+            id: key,
+            ...data[key],
+          }));
+        setSocialHabits(habitsArray);
+      };
+
+      loadHabits();
+    }, [])
+  )
 
   useEffect(() => {
     if (value === '') {
@@ -87,12 +92,17 @@ export default function Explore() {
   const socialHabitItem = ({ item }: any) => {
     return (
       <View style={[styles.card, styles.habitItemInner]}>
-        <Text style={styles.habitItemText}>{item.title}</Text>
+        <Text style={styles.habitItemText} numberOfLines={1}>
+          {item.title}
+        </Text>
+
         <TouchableOpacity
           style={styles.habitItemButton}
-          onPress={() => {setSeeDetails(true), setItemDetails(item)}}
-        >
-          <Text style={styles.habitItemButtonText}>details</Text>
+          onPress={() => {
+            setItemDetails(item);
+            setSeeDetails(true);
+          }}>
+          <Text style={styles.habitItemButtonText}>Details</Text>
         </TouchableOpacity>
       </View>
     );
@@ -116,6 +126,7 @@ export default function Explore() {
         keyExtractor={item => item.id}
         contentContainerStyle={{
           gap: 10,
+          paddingBottom: 80,
         }}
       />
 
@@ -161,39 +172,45 @@ const styles = StyleSheet.create({
     width: '95%',
     padding: 10,
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 10,
     boxShadow: '0px 4px 10px rgba(0,0,0,0.25)',
+  },
+
+  picker: {
+    borderRadius: 10,
   },
 
   habitItemInner: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-
-  picker: {
-    borderRadius: 15,
+    justifyContent: 'space-between',
+    minHeight: 60,
   },
 
   habitItemText: {
+    flex: 1,
     fontSize: 20,
+    fontWeight: '600',
+    color: '#1F2937',
+    marginRight: 10,
   },
 
   habitItemButton: {
-    padding: 10,
     backgroundColor: '#3B82F6',
-    borderRadius: 15,
-    position: 'absolute',
-    right: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 10,
   },
 
   habitItemButtonText: {
     color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
   },
 
   modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.5)',
   },
 
   habitDetailModal: {
@@ -203,12 +220,13 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     padding: 20,
     gap: 10,
+    boxShadow: '0px 4px 10px rgba(0,0,0,0.25)',
   },
 
   addButton: {
     padding: 10,
     backgroundColor: '#3B82F6',
-    borderRadius: 15,
+    borderRadius: 10,
     position: 'absolute',
     bottom: 20,
     alignSelf: "center",

@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "517572631365",
+    "firebase_url": "https://skillforge-react-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "skillforge-react",
     "storage_bucket": "skillforge-react.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:517572631365:android:cd34ba5991b9a13702bc2c",
+        "mobilesdk_app_id": "1:517572631365:android:3ac0a5b46b15302202bc2c",
         "android_client_info": {
-          "package_name": "com.leon.skillforge"
+          "package_name": "com.skillforge"
         }
       },
       "oauth_client": [],
