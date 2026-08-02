@@ -1,16 +1,25 @@
 import "react"
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 
 
 
 function Login({navigation} : any) {
-  const [email, setEmail] = useState('leonhuber2010@gmail.com');
-  const [password, setPassword] = useState('LeonTest');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [loginScreen, setLoginScreen] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("")
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged((user) => {
@@ -50,6 +59,10 @@ function Login({navigation} : any) {
     }
   }
 
+  const resetPasswort = () => {
+      auth().sendPasswordResetEmail(resetEmail)
+  }
+
   if(loading){
     if (loginScreen) {
       return (
@@ -62,6 +75,9 @@ function Login({navigation} : any) {
             <TouchableOpacity style={styles.button} onPress={() => login(email, password)}>
               <Text style={styles.buttonText}>Sign in</Text>
             </TouchableOpacity>
+              <TouchableOpacity onPress={() => setResetPassword(true)}>
+                  <Text>Reset password?</Text>
+              </TouchableOpacity>
             <TouchableOpacity onPress={() => setLoginScreen(!loginScreen)}>
               <Text>Don´t have a account? create one</Text>
             </TouchableOpacity>
@@ -84,6 +100,18 @@ function Login({navigation} : any) {
               <Text>Already have a account? Sign in</Text>
             </TouchableOpacity>
           </View>
+
+            <Modal transparent visible={resetPassword}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.resetPasswortContainer}>
+                        <Text style={styles.heading}>Reset Password</Text>
+                        <TextInput placeholder={"Email"} style={styles.input} value={resetEmail} onChangeText={setResetEmail}/>
+                        <TouchableOpacity style={styles.button} onPress={() => resetPasswort()}>
+                            <Text style={styles.buttonText}>Send Email</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
       )
     }
@@ -148,7 +176,22 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#3B82F6',
     fontSize: 10,
-  }
+  },
+
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+
+    resetPasswortContainer: {
+        height: '50%',
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        padding: 20,
+        gap: 10,
+        boxShadow: '0px 4px 10px rgba(0,0,0,0.25)',
+    },
 })
 
 export default Login;
