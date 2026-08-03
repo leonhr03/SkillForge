@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "517572631365",
+    "firebase_url": "https://skillforge-react-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "skillforge-react",
+    "storage_bucket": "skillforge-react.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517572631365:android:3ac0a5b46b15302202bc2c",
+        "android_client_info": {
+          "package_name": "com.skillforge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGwbwsrkAH2mdSmz45n3rd-RgKLxy8ibA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517572631365:android:a1e4554e31ede62e02bc2c",
+        "android_client_info": {
+          "package_name": "com.skillforge.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGwbwsrkAH2mdSmz45n3rd-RgKLxy8ibA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

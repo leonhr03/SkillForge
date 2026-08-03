@@ -11,22 +11,25 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import database from "@react-native-firebase/database"
+import database from '@react-native-firebase/database';
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/core';
 import DropDownPicker from 'react-native-dropdown-picker';
-import * as Progress from "react-native-progress"
+import * as Progress from 'react-native-progress';
+import notifee, { RepeatFrequency, TriggerType } from '@notifee/react-native';
+import auth from '@react-native-firebase/auth';
 
 interface Habit {
   id: string;
   title: string;
   description: string;
   category: string;
-  tasks: string[];
+  tasks?: string[];
 }
 
 interface Todo {
+  habitId: string;
+  taskIndex: number;
   title: string;
   checked: boolean;
   lastReset: string;
@@ -34,15 +37,16 @@ interface Todo {
 
 function Home() {
   const insets = useSafeAreaInsets();
-  const [yourHabits, setYourHabits] = useState<Habit[]>([])
+  const [yourHabits, setYourHabits] = useState<Habit[]>([]);
   const [dailyTasks, setDailyTasks] = useState<Todo[]>([]);
-  const [addModal, setAddModal] = useState(false)
-  const [newTitle, setNewTitle] = useState("")
-  const [newDescription, setNewDescription] = useState("")
-  const [newTask, setNewTask] = useState("")
+  const [addModal, setAddModal] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newTask, setNewTask] = useState('');
   const [newTasks, setNewTasks] = useState<string[]>([]);
+  const [newPublic, setNewPublic] = useState(true);
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [categoryValue, setCategoryValue] = useState("");
+  const [categoryValue, setCategoryValue] = useState('');
   const [categories, setCategories] = useState([
     { label: 'Health', value: 'health' },
     { label: 'Fitness', value: 'fitness' },
@@ -61,192 +65,237 @@ function Home() {
     { label: 'Social Life', value: 'social_life' },
     { label: 'Time Management', value: 'time_management' },
   ]);
-  const [taskProgress, setTaskProgress] = useState<number>();
+  const [taskProgress, setTaskProgress] = useState<number>(0);
+  const [doneTasks, setDoneTasks] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
 
-    useFocusEffect(
-        React.useCallback(() => {
+  const uid = auth().currentUser?.uid;
 
-            const loadYourHabits = async () => {
-                const today = new Date().toISOString().split("T")[0];
+  const loadYourHabits = React.useCallback(async () => {
+    if (!uid) return;
 
-                const storedHabits = await AsyncStorage.getItem("myHabits");
-                const parsed: Habit[] = storedHabits ? JSON.parse(storedHabits) : [];
+    const today = new Date().toISOString().split('T')[0];
 
-                setYourHabits(parsed);
+    // 1. Habits aus Firebase Realtime Database laden
+    const habitsSnapshot = await database().ref(`users/${uid}/habits`).once('value');
+    const habitsData = habitsSnapshot.val();
 
-                const storedTasks = await AsyncStorage.getItem("dailyTasks");
-                const oldTasks: Todo[] = storedTasks ? JSON.parse(storedTasks) : [];
+    const loadedHabits: Habit[] = [];
+    if (habitsData) {
+      Object.keys(habitsData).forEach(key => {
+        loadedHabits.push({
+          id: key,
+          ...habitsData[key],
+        });
+      });
+    }
 
-                const resetTasks = oldTasks.map(todo => {
-                    if (todo.lastReset !== today) {
-                        return {
-                            ...todo,
-                            checked: false,
-                            lastReset: today,
-                        };
-                    }
+    setYourHabits(loadedHabits);
 
-                    return todo;
-                });
+    // 2. Status der Daily Tasks aus der DB laden (users/${uid}/dailyTasks)
+    const tasksSnapshot = await database().ref(`users/${uid}/dailyTasks`).once('value');
+    const dbTasks: Record<string, Todo> = tasksSnapshot.val() || {};
 
-                const allTasks: Todo[] = [];
+    const allTasks: Todo[] = [];
 
-                parsed.forEach(habit => {
-                    habit.tasks.forEach(task => {
+    loadedHabits.forEach((habit: Habit) => {
+      if (habit.tasks && Array.isArray(habit.tasks)) {
+        habit.tasks.forEach((taskTitle: string, index: number) => {
+          const taskKey = `${habit.id}_${index}`;
+          const existing = dbTasks[taskKey];
 
-                        const existingTask = resetTasks.find(
-                            oldTask => oldTask.title === task
-                        );
+          // Falls ein neues Datum angebrochen ist -> Reset
+          const isChecked = existing && existing.lastReset === today ? existing.checked : false;
 
-                        allTasks.push(
-                            existingTask
-                                ? existingTask
-                                : {
-                                    title: task,
-                                    checked: false,
-                                    lastReset: today,
-                                }
-                        );
+          allTasks.push({
+            habitId: habit.id,
+            taskIndex: index,
+            title: taskTitle,
+            checked: isChecked,
+            lastReset: today,
+          });
+        });
+      }
+    });
 
-                    });
-                });
+    const done = allTasks.filter(todo => todo.checked).length;
+    const total = allTasks.length;
 
-                setDailyTasks(allTasks);
+    setDoneTasks(done);
+    setTotalTasks(total);
+    setTaskProgress(total > 0 ? done / total : 0);
 
-                await AsyncStorage.setItem(
-                    "dailyTasks",
-                    JSON.stringify(allTasks)
-                );
-            };
+    if (allTasks.length !== 0) {
+      sendNotification().catch(err => console.log(err));
+    }
 
-            loadYourHabits();
+    setDailyTasks(allTasks);
+  }, [uid]);
 
-        }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      loadYourHabits();
+    }, [loadYourHabits]),
+  );
+
+  const sendNotification = async () => {
+    await notifee.cancelTriggerNotifications();
+    const date = new Date();
+
+    date.setHours(13);
+    date.setMinutes(0);
+    date.setSeconds(0);
+
+    if (date.getTime() < Date.now()) {
+      date.setDate(date.getDate() + 1);
+    }
+
+    await notifee.createTriggerNotification(
+      {
+        title: 'SkillForge',
+        body: 'Time to check your Tasks',
+        android: {
+          channelId: 'habit-reminders',
+          smallIcon: 'ic_reminder',
+        },
+      },
+      {
+        type: TriggerType.TIMESTAMP,
+        timestamp: date.getTime(),
+        repeatFrequency: RepeatFrequency.DAILY,
+      },
     );
+  };
 
-    const addNewHabit = async () => {
-        try {
-            Alert.alert("START DATABASE");
+  const addNewHabit = async () => {
+    if (!newTitle.trim()) {
+      Alert.alert('Error', 'Title fehlt');
+      return;
+    }
 
-            if (!newTitle.trim()) {
-                Alert.alert("Error", "Title fehlt");
-                return;
-            }
+    if (!uid) return;
 
-            const ref = database().ref('/socialHabits');
-
-            await ref.push({
-                title: newTitle,
-                description: newDescription,
-                category: categoryValue || "none",
-                tasks: newTasks
-            });
-
-            Alert.alert("DATABASE SUCCESS");
-
-        } catch (error: any) {
-            Alert.alert(
-                "DATABASE ERROR",
-                error?.message || "Unknown error"
-            );
-
-            console.log(error);
-        }
+    const habitPayload = {
+      title: newTitle,
+      description: newDescription,
+      category: categoryValue || 'none',
+      tasks: newTasks,
     };
 
-  const checkTodo = async (currentTodo: string) => {
-    const stored = await AsyncStorage.getItem("dailyTasks");
-    const parsed: Todo[] = stored ? JSON.parse(stored) : [];
+    if (newPublic) {
+      await database().ref('/socialHabits').push(habitPayload);
+    }
 
-    const updatedTasks = parsed.map((todo) =>
-      todo.title === currentTodo
-        ? { ...todo, checked: !todo.checked }
-        : todo
+    // Speichern unter `users/${uid}/habits` statt direkt unter `users/${uid}`
+    await database().ref(`users/${uid}/habits`).push(habitPayload);
+
+    // Reset Form Fields
+    setNewTitle('');
+    setNewDescription('');
+    setNewTasks([]);
+    setCategoryValue('');
+
+    await loadYourHabits();
+    setAddModal(false);
+  };
+
+  const checkTodo = async (targetTodo: Todo) => {
+    if (!uid) return;
+
+    const today = new Date().toISOString().split('T')[0];
+    const newCheckedState = !targetTodo.checked;
+    const taskKey = `${targetTodo.habitId}_${targetTodo.taskIndex}`;
+
+    // 1. Direkt in Firebase aktualisieren
+    await database().ref(`users/${uid}/dailyTasks/${taskKey}`).set({
+      title: targetTodo.title,
+      checked: newCheckedState,
+      lastReset: today,
+    });
+
+    // 2. Lokalen State anpassen
+    const updatedTasks = dailyTasks.map(todo =>
+      todo.habitId === targetTodo.habitId && todo.taskIndex === targetTodo.taskIndex
+        ? { ...todo, checked: newCheckedState, lastReset: today }
+        : todo,
     );
 
-    const doneTasks: number = updatedTasks.filter(todo => todo.checked).length;
+    const newDoneTasks = updatedTasks.filter(todo => todo.checked).length;
+    const newTotalTasks = updatedTasks.length;
+    const progress = newTotalTasks > 0 ? newDoneTasks / newTotalTasks : 0;
 
-    const totalTasks: number = updatedTasks.length
-
-    const progress: number = doneTasks / totalTasks
-
-    setTaskProgress(progress)
-
-    await AsyncStorage.setItem(
-      "dailyTasks",
-      JSON.stringify(updatedTasks)
-    );
-
-
-
-    setDailyTasks(updatedTasks)
+    setTaskProgress(progress);
+    setDoneTasks(newDoneTasks);
+    setTotalTasks(newTotalTasks);
+    setDailyTasks(updatedTasks);
   };
 
   const addTask = () => {
-    if (newTask.trim() === "") return;
-
+    if (newTask.trim() === '') return;
     setNewTasks([...newTasks, newTask]);
-    setNewTask("");
+    setNewTask('');
   };
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#fff" }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       contentContainerStyle={[
         styles.container,
-        { paddingTop: insets.top + 16 }
+        { paddingTop: insets.top + 16, paddingBottom: 80 },
       ]}
     >
       <Text style={styles.heading}>Welcome Back✌️</Text>
 
-      <View style={styles.card} >
-        <Text style={styles.cardTitle}>1/3 tasks checked</Text>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>
+          {doneTasks}/{totalTasks} tasks checked
+        </Text>
         <View style={styles.progressContainer}>
-          <Progress.Bar
-            progress={taskProgress ?? 0}
-            width={null}
-            height={12}
-          />
+          <Progress.Bar progress={taskProgress ?? 0} width={null} height={12} />
         </View>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Your Habits</Text>
-        { yourHabits?.map(item => (
-          <View style={styles.card}>
-            <Text>{item.title}</Text>
+        {yourHabits?.map(item => (
+          <View key={item.id} style={styles.card}>
+            <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
           </View>
-        ))
-        }
+        ))}
       </View>
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Daily Tasks</Text>
-        { dailyTasks?.map(item => (
-          <View style={[styles.card, styles.taskItemInner]}>
+        {dailyTasks?.map((item, index) => (
+          <View key={`${item.habitId}_${index}`} style={[styles.card, styles.taskItemInner]}>
             <Text>{item.title}</Text>
-            <TouchableOpacity style={styles.taskItemButton} onPress={() => checkTodo(item.title)}>
-              { item.checked ?
-                ( <Text style={styles.taskItemButtonText}>Erledigt</Text> ) :
-                ( <Text style={styles.taskItemButtonText}>Ausstehend</Text>)
-
-              }
-
+            <TouchableOpacity
+              style={styles.taskItemButton}
+              onPress={() => checkTodo(item)}
+            >
+              <Text style={styles.taskItemButtonText}>
+                {item.checked ? 'Erledigt' : 'Ausstehend'}
+              </Text>
             </TouchableOpacity>
           </View>
-        ))
-        }
+        ))}
       </View>
 
       <View style={[styles.card, styles.taskItemInner]}>
         <Text style={styles.cardTitle}>Add new habit</Text>
-        <TouchableOpacity style={styles.openAddAlertButton} onPress={() => setAddModal(true)}>
+        <TouchableOpacity
+          style={styles.openAddAlertButton}
+          onPress={() => setAddModal(true)}
+        >
           <Text style={styles.openAddAlertButtonText}>Add</Text>
         </TouchableOpacity>
       </View>
 
       <Modal transparent animationType={'slide'} visible={addModal}>
-        <Pressable style={styles.modalContainer} onPress={() => setAddModal(false)}>
+        <Pressable
+          style={styles.modalContainer}
+          onPress={() => setAddModal(false)}
+        >
           <Pressable style={styles.addHabitContainer} onPress={() => {}}>
             <Text style={styles.heading}>Add new Habit</Text>
 
@@ -254,7 +303,7 @@ function Home() {
               value={newTitle}
               onChangeText={setNewTitle}
               placeholder="Title"
-              placeholderTextColor={"#777"}
+              placeholderTextColor={'#777'}
               style={styles.addHabitInput}
             />
 
@@ -262,10 +311,46 @@ function Home() {
               value={newDescription}
               onChangeText={setNewDescription}
               placeholder="Description"
-              placeholderTextColor={"#777"}
+              placeholderTextColor={'#777'}
               multiline
               style={[styles.addHabitInput, styles.descriptionInput]}
             />
+
+            <View style={styles.row}>
+              <TouchableOpacity
+                style={
+                  newPublic ? styles.publicButton : styles.uncurrentPublicButton
+                }
+                onPress={() => setNewPublic(true)}
+              >
+                <Text
+                  style={
+                    newPublic
+                      ? styles.publicButtonTextWhite
+                      : styles.publicButtonTextBlack
+                  }
+                >
+                  Public
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={
+                  newPublic ? styles.uncurrentPublicButton : styles.publicButton
+                }
+                onPress={() => setNewPublic(false)}
+              >
+                <Text
+                  style={
+                    newPublic
+                      ? styles.publicButtonTextBlack
+                      : styles.publicButtonTextWhite
+                  }
+                >
+                  Unpublic
+                </Text>
+              </TouchableOpacity>
+            </View>
 
             <DropDownPicker
               open={categoryOpen}
@@ -280,41 +365,35 @@ function Home() {
             />
 
             <View style={styles.taskInputContainer}>
-
               <TextInput
                 value={newTask}
                 onChangeText={setNewTask}
                 placeholder="Add Task"
-                placeholderTextColor={"#777"}
+                placeholderTextColor={'#777'}
                 style={styles.taskInput}
               />
 
-              <TouchableOpacity
-                style={styles.taskAddButton}
-                onPress={addTask}
-              >
+              <TouchableOpacity style={styles.taskAddButton} onPress={addTask}>
                 <Text style={styles.taskAddButtonText}>+</Text>
               </TouchableOpacity>
-
             </View>
 
-          <ScrollView>
-            <View style={styles.taskList}>
-              {newTasks.map((task, index) => (
-                <View key={index} style={styles.taskPreview}>
-                  <Text>{task}</Text>
-                </View>
-              ))}
-            </View>
-          </ScrollView>
+            <ScrollView>
+              <View style={styles.taskList}>
+                {newTasks.map((task, index) => (
+                  <View key={index} style={styles.taskPreview}>
+                    <Text>{task}</Text>
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
 
-
-            <TouchableOpacity style={styles.addButton} onPress={() => addNewHabit()}>
-              <Text style={styles.addButtonText} >
-                Add Habit
-              </Text>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => addNewHabit()}
+            >
+              <Text style={styles.addButtonText}>Add Habit</Text>
             </TouchableOpacity>
-
           </Pressable>
         </Pressable>
       </Modal>
@@ -324,7 +403,6 @@ function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     gap: 20,
     padding: 10,
@@ -405,47 +483,47 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     bottom: 20,
-    alignSelf: "center",
-    width: "50%",
-    alignItems: "center",
+    alignSelf: 'center',
+    width: '50%',
+    alignItems: 'center',
   },
 
   addButtonText: {
-    color: "#fff",
+    color: '#fff',
   },
 
   addHabitInput: {
     padding: 10,
     borderWidth: 1,
-    borderColor: "#000",
+    borderColor: '#000',
     borderRadius: 10,
-    width: "95%",
-    alignSelf: "center",
+    width: '95%',
+    alignSelf: 'center',
   },
 
   descriptionInput: {
     height: 100,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
   },
 
   categoryPicker: {
     borderRadius: 10,
-    width: "95%",
-    alignSelf: "center",
-    borderColor: "#000",
+    width: '95%',
+    alignSelf: 'center',
+    borderColor: '#000',
   },
 
   categoryDropdown: {
-    width: "95%",
-    alignSelf: "center",
-    borderColor: "#000",
+    width: '95%',
+    alignSelf: 'center',
+    borderColor: '#000',
   },
 
   taskInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "95%",
-    alignSelf: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '95%',
+    alignSelf: 'center',
     gap: 8,
   },
 
@@ -453,40 +531,73 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     borderWidth: 1,
-    borderColor: "#000",
+    borderColor: '#000',
     borderRadius: 10,
   },
 
   taskAddButton: {
-    backgroundColor: "#3B82F6",
+    backgroundColor: '#3B82F6',
     width: 40,
     height: 40,
     borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   taskAddButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 
   taskList: {
-    width: "95%",
-    alignSelf: "center",
+    width: '95%',
+    alignSelf: 'center',
     gap: 5,
   },
 
   taskPreview: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: '#F3F4F6',
     padding: 10,
     borderRadius: 10,
   },
 
   progressContainer: {
-    width: "95%",
-    alignSelf: "center",
+    width: '95%',
+    alignSelf: 'center',
+  },
+
+  row: {
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
+
+  publicButton: {
+    padding: 10,
+    width: '45%',
+    backgroundColor: '#3B82F6',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  uncurrentPublicButton: {
+    padding: 10,
+    width: '45%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  publicButtonTextWhite: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+
+  publicButtonTextBlack: {
+    color: '#000',
+    fontWeight: 'bold',
   },
 });
 

@@ -11,8 +11,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import React, { useEffect, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import database from '@react-native-firebase/database';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/core';
+import auth from '@react-native-firebase/auth';
 
 interface Habit {
   id: string;
@@ -81,12 +81,11 @@ export default function Explore() {
   }, [value, socialHabits]);
 
   const addHabitToOwn = async() => {
-    const stored : any = await AsyncStorage.getItem("myHabits")
-    const parsed = stored ? JSON.parse(stored) : []
+    const uid = auth().currentUser?.uid
 
-    const newMyHabits: Habit[] = [itemDetails, ...parsed]
+    const ref = database().ref(`users/${uid}/habits`)
 
-    await AsyncStorage.setItem("myHabits", JSON.stringify(newMyHabits))
+    ref.push(itemDetails)
   }
 
   const socialHabitItem = ({ item }: any) => {

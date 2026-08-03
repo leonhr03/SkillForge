@@ -2033,6 +2033,11 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - RNNotifee (9.1.8):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 9.1.8)
+  - RNNotifee/NotifeeCore (9.1.8):
+    - React-Core
   - RNScreens (4.26.2):
     - hermes-engine
     - RCTRequired
@@ -2230,6 +2235,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBDatabase (from `../node_modules/@react-native-firebase/database`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -2411,6 +2417,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/database"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -2513,6 +2521,7 @@ SPEC CHECKSUMS:
   RNFBAuth: 2c861e68aef8b9d6d2ddfbdf41d1dbcf2544ea8b
   RNFBDatabase: 79972776c37be9855a46513c0d7c19356e0df550
   RNGestureHandler: 4cc2d94e496c41189a8243ecf79158e214423c5b
+  RNNotifee: 5e3b271e8ea7456a36eec994085543c9adca9168
   RNScreens: 5b4b260e28d8263d97fddcb53e59649515797bcc
   RNSVG: 8efa5ad14ceb98fe56c03793bd55bc4bd30ad84b
   RNVectorIcons: bd88db8836a8611aff4b44f061364c07002a6c2a

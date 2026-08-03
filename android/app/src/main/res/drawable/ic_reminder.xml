@@ -1,0 +1,48 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="300dp"
+        android:height="300dp"
+        android:viewportWidth="200"
+        android:viewportHeight="200">
+
+    <!-- Kreisbogen -->
+    <path
+            android:pathData="M 98,61 A 48,48 0 1,0 138,103"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="4.5"
+            android:strokeLineCap="round" />
+
+    <!-- Knotenpunkte (Kreise) -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 98,61 m -6,0 a 6,6 0 1,0 12,0 a 6,6 0 1,0 -12,0" />
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 57,103 m -6,0 a 6,6 0 1,0 12,0 a 6,6 0 1,0 -12,0" />
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 127,133 m -6,0 a 6,6 0 1,0 12,0 a 6,6 0 1,0 -12,0" />
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 138,103 m -6,0 a 6,6 0 1,0 12,0 a 6,6 0 1,0 -12,0" />
+
+    <!-- Häkchen / Stamm -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 78,101 L 96,122 L 136,68 C 131,73 124,81 96,112 L 83,96 Z" />
+
+    <!-- Linkes Blatt -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 128,71 C 120,62 120,52 126,52 C 127,63 131,68 132,72 Z" />
+
+    <!-- Oberes Blatt -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 134,68 C 135,52 142,45 155,48 C 151,60 143,66 138,69 Z" />
+
+    <!-- Rechtes Blatt -->
+    <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 137,72 C 145,72 155,71 155,77 C 146,83 138,80 134,75 Z" />
+
+</vector>
